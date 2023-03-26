@@ -1365,6 +1365,7 @@ name = "webidentity-tester"
 version = "0.1.0"
 dependencies = [
  "rusoto_core",
+ "rusoto_credential",
  "rusoto_sts",
  "tokio",
 ]

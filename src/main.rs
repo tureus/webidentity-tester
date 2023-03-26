@@ -7,7 +7,7 @@ async fn main() {
     println!("default chain says: {:?}", identity);
 
     let provider = rusoto_sts::WebIdentityProvider::from_k8s_env();
-    let provider = rusoto_credential::AutoRefreshingProvider::new(provider)?;
+    let provider = rusoto_credential::AutoRefreshingProvider::new(provider).unwrap();
     let client = StsClient::new_with(rusoto_core::HttpClient::new().unwrap(),
     provider, rusoto_core::Region::default());
     let identity = client.get_caller_identity(GetCallerIdentityRequest{}).await;
