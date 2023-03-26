@@ -1,0 +1,28 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::554546661178:role/k3-doit
+  name: webidentity-tester
+  namespace: default
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webidentity-tester
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: webidentity-tester
+  template:
+    metadata:
+      labels:
+        app: webidentity-tester
+    spec:
+      serviceAccountName: webidentity-tester
+      containers:
+        - name: build
+          image: rustlang/rust:nightly
+          command: ["sleep", "infinity"]
